@@ -1,0 +1,26 @@
+BootStrap: docker
+From: ubuntu:latest
+IncludeCmd: yes
+
+%labels
+    Maintainer Amir Shams
+    Version v1.0
+%post
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# this will install all necessary packages and prepare the container
+	apt-get update
+	apt-get install -y sudo
+	sudo apt-get install -y build-essential ansible
+	sudo apt-get install -y git gcc texinfo unzip
+	sudo apt-get install -y libexpat1-dev  
+	sudo apt-get install -y zlib1g-dev
+	sudo apt-get install -y autoconf
+	sudo apt-get install -y automake
+	sudo apt-get install -y libtool
+	sudo apt-get install -y ghostscript
+	sudo apt-get install -y libopenmpi-dev
+	sudo apt-get install -y default-jdk
+	sudo apt-get install -y ant
+	sudo cpan Math::CDF XML::Simple XML::Compile::SOAP11 XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP HTML::Template Log::Log4perl JSON
+	mkdir /gpfs /spin1 /gs2 /gs3 /gs4 /gs5 /gs6 /data /scratch /fdb /lscratch
+

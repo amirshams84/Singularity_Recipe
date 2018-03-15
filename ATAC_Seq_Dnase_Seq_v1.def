@@ -1,0 +1,33 @@
+BootStrap: docker
+From: amirshams/centos:latest
+IncludeCmd: yes
+
+%labels
+    Maintainer Amir Shams
+    Version v1.0
+
+%post
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# this will install all necessary packages and prepare the container
+    sudo yum install -y java-1.8.0-openjdk
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -bfp /opt/miniconda3
+    
+    export PATH=/opt/miniconda3/bin:$PATH
+
+    wget https://github.com/leepc12/BigDataScript/blob/master/distro/bds_Linux.tgz?raw=true -O bds_Linux.tgz
+    mv bds_Linux.tgz /usr/local
+    cd /usr/local
+    tar zxvf bds_Linux.tgz
+    git clone https://github.com/kundajelab/atac_dnase_pipelines --recursive
+    cd /usr/local/atac_dnase_pipelines
+    bash install_dependencies.sh
+    mkdir /gpfs /spin1 /gs2 /gs3 /gs4 /gs5 /gs6 /data /scratch /fdb /lscratch
+    
+%environment    
+    export PATH=/usr/local/bin:$PATH
+    export PATH=/opt/miniconda3/bin:$PATH
+    export PATH=/usr/local/.bds:$PATH
+    export PATH=/usr/local/Genome_Data:$PATH
+
+
